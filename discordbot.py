@@ -33,7 +33,6 @@ async def pubg(ctx, arg):
     ret_text += "平均ダメージ:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.deals.stats-item.stats-top-graph > p").text 
     ret_text += "ゲーム数:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.games.stats-item.stats-top-graph > p").text
     ret_text += "最高キル:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.mostkills.stats-item.stats-top-graph > p").text
-    ret_text.replace("\r\n", "")
-    await ctx.send(ret_text)
+    await ctx.send(ret_text.replace("\r\n", ""))
 
 bot.run(token)

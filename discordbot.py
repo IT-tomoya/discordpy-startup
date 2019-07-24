@@ -1,9 +1,8 @@
 from discord.ext import commands
 import os
 import traceback
-import urllib2
+import requests
 from bs4 import BeautifulSoup
-
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -24,10 +23,10 @@ async def pubg(ctx, arg):
     url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
     
     # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
-    instance = urllib2.urlopen(url)
+    instance = requests.get(target_url)  
 
     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
-    soup = BeautifulSoup(instance, "html.parser")
+    soup = BeautifulSoup(instance.text, "html.parser")
 
     # CSSセレクターを使って指定した場所のtextを表示します
     ret_text += "KD:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.kd.stats-item.stats-top-graph > p").text

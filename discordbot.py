@@ -15,11 +15,11 @@ async def ping(ctx):
     await ctx.send('pong')
     
 @bot.command()
-async def pubg(ctx):
-    await ctx.send(ctx.content)
+async def pubg(ctx, arg):
+    await ctx.send(arg)
     
 @bot.listen()
 async def on_message(message):
-    await ctx.send(message)
+    await ctx.send('listen')
     
 bot.run(token)

@@ -20,5 +20,4 @@ async def ping(ctx):
 async def pubg(ctx):
     await ctx.send(ctx.content)
     
-client.run("token")
-#bot.run(token)
+bot.run(token)

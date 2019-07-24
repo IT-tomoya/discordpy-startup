@@ -23,7 +23,7 @@ async def pubg(ctx, arg):
     url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
     
     # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
-    instance = requests.get(target_url)  
+    instance = requests.get(url)  
 
     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
     soup = BeautifulSoup(instance.text, "html.parser")

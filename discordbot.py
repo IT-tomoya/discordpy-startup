@@ -3,6 +3,7 @@ import os
 import traceback
 
 bot = commands.Bot(command_prefix='/')
+client = discord.Client()
 token = os.environ['DISCORD_BOT_TOKEN']
 
 
@@ -15,8 +16,21 @@ async def on_command_error(ctx, error):
 async def ping(ctx):
     await ctx.send(ctx.content)
     
+    
+@client.event
+async def on_ready():
+    print('wake up')
+    
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
+
    
 
 
-
-bot.run(token)
+client.run("token")
+#bot.run(token)

@@ -1,1 +1,4 @@
 discord.py[voice]
+beautifulsoup4==4.6.0 
+lxml==4.0.0
+requests==2.18.4

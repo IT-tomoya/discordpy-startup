@@ -22,7 +22,7 @@ async def pubg(ctx, arg):
     await ctx.send(get_status(arg))
     
 
-def get_status(arg):
+async def get_status(arg):
     ret_text = "arg"
     # アクセスするURL
     url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"

@@ -67,12 +67,10 @@ async def pubg(ctx, arg):
     # ブラウザでアクセスする
     driver.get(url)
     
-    #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()	
-    try:
-        driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
-    except:
-        await ctx.send("更新失敗")
-    
+    #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()
+    await ctx.send("更新処理")
+    driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
+
     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
     instance = requests.get(url)
     soup = BeautifulSoup(instance.text, "html.parser")

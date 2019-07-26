@@ -3,6 +3,7 @@ import os
 import traceback
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']

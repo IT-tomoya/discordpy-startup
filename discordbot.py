@@ -4,10 +4,10 @@ import traceback
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
-driver_path = os.environ['GOOGLE_CHROME_SHIM']
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -24,7 +24,7 @@ async def pubg(ctx, arg):
     #url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
     url = "https://pubg.op.gg/user/" + arg
     
-    # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
+#     # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
 #     instance = requests.get(url)  
 
 #     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
@@ -33,6 +33,8 @@ async def pubg(ctx, arg):
 #     # CSSセレクターを使って指定した場所のtextを表示します
 #     #ret_text1 = "KD:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.kd.stats-item.stats-top-graph > p").text
 #     ret_text1 = "KD:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(1) > div:nth-child(2)").text
+#     ret_text1 = "KD:" + soup.find_all("div", class_="link", href="/link")
+    
 #     ret_text1 = ret_text1.replace("\n", "")
 #     #ret_text2 = "平均ダメージ:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.deals.stats-item.stats-top-graph > p").text 
     
@@ -46,15 +48,28 @@ async def pubg(ctx, arg):
 #     #ret_text4 = "最高キル:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.mostkills.stats-item.stats-top-graph > p").text
 #     ret_text4 = "最高キル:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(10) > div.ranked-stats__value").text
 #     ret_text4 = ret_text4.replace("\n", "")
-    driver = webdriver.Chrome(driver_path)
-    driver.get(URL)
-    ret_text1 = driver.find_element_by_class_name("ranked-stats__value ranked-stats__value--imp ranked-stats__value--good").text
-    driver.close()
-    driver.quit()
-    
-    
-    ret_text = ret_text1 + "\n" + ret_text2 + "\n" + ret_text3 + "\n" + ret_text4 
-    await ctx.send(ret_text.replace(" ", ""))
 
+    
+#     ret_text = ret_text1 + "\n" + ret_text2 + "\n" + ret_text3 + "\n" + ret_text4 
+#     await ctx.send(ret_text.replace(" ", ""))
+
+    # ブラウザのオプションを格納する変数をもらってきます。
+    options = Options()
+    options.binary_location = GOOGLE_CHROME_BIN
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
+    options.set_headless(True)
+
+    # ブラウザを起動する
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
+
+    # ブラウザでアクセスする
+    driver.get(url)
+
+    # HTMLを文字コードをUTF-8に変換してから取得します。
+    html = driver.page_source.encode('utf-8')
+    ret_text1 = "KD:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(1) > div:nth-child(2)").text
+    await ctx.send(ret_text1.replace(" ", ""))
 
 bot.run(token)

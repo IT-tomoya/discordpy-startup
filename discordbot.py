@@ -64,10 +64,10 @@ async def pubg(ctx, arg):
 
     # ブラウザを起動する
     driver = webdriver.Chrome(options=options)
-
+    driver.implicitly_wait(10)
     # ブラウザでアクセスする
     driver.get(url)
-    time.sleep(2)
+    
     driver.find_element_by_class_name('renew').click()	
     time.sleep(3)
 

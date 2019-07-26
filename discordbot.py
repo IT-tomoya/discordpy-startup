@@ -64,13 +64,13 @@ async def pubg(ctx, arg):
 
     # ブラウザを起動する
     driver = webdriver.Chrome(options=options)
-    driver.implicitly_wait(10)
+    #driver.implicitly_wait(10)
     # ブラウザでアクセスする
     driver.get(url)
     
     #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()	
     driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()
-    time.sleep(3)
+    #time.sleep(3)
 
     instance = requests.get(url)  
 

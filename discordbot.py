@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import time
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -66,9 +67,11 @@ async def pubg(ctx, arg):
 
     # ブラウザでアクセスする
     driver.get(url)
+    stats = driver.find_element_by_class_name('renew').click()	
+　　time.sleep(5)
 
     # HTMLを文字コードをUTF-8に変換してから取得します。
-    html = driver.page_source.encode('utf-8')
+    #html = driver.page_source.encode('utf-8')
     soup = BeautifulSoup(html, "html.parser")
     for a in soup:
 	ret_text1 += a + "\n"

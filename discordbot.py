@@ -71,7 +71,7 @@ async def pubg(ctx, arg):
     html = driver.page_source.encode('utf-8')
     soup = BeautifulSoup(html, "html.parser")
     for a in soup:
-	print(a)
+	ret_text1 += a + "\n"
 	break;
     
     ret_text1 = "KD:" + soup.find_all("div", class_="ranked-stats__value ranked-stats__value--imp ranked-stats__value--good").text

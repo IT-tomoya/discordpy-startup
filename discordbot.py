@@ -25,58 +25,45 @@ async def pubg(ctx, arg):
     url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
     #url = "https://pubg.op.gg/user/" + arg
     
-#     # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
-#     instance = requests.get(url)  
-
-#     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
-#     soup = BeautifulSoup(instance.text, "html.parser")
-
-#     # CSSセレクターを使って指定した場所のtextを表示します
-#     #ret_text1 = "KD:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.kd.stats-item.stats-top-graph > p").text
-#     ret_text1 = "KD:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(1) > div:nth-child(2)").text
-#     ret_text1 = "KD:" + soup.find_all("div", class_="link", href="/link")
-    
-#     ret_text1 = ret_text1.replace("\n", "")
-#     #ret_text2 = "平均ダメージ:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.deals.stats-item.stats-top-graph > p").text 
-    
-#     ret_text2 = "平均ダメージ:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(2) > div:nth-child(2)").text
-#     ret_text2 = ret_text2.replace("\n", "")
-    
-#     #ret_text3 = "ゲーム数:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.games.stats-item.stats-top-graph > p").text
-#     ret_text3 = "ゲーム数:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > div > div:nth-child(2) > div:nth-child(1)").text
-#     ret_text3 = ret_text3.replace("\n", "")
-    
-#     #ret_text4 = "最高キル:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.mostkills.stats-item.stats-top-graph > p").text
-#     ret_text4 = "最高キル:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(10) > div.ranked-stats__value").text
-#     ret_text4 = ret_text4.replace("\n", "")
-
-    
-#     ret_text = ret_text1 + "\n" + ret_text2 + "\n" + ret_text3 + "\n" + ret_text4 
-#     await ctx.send(ret_text.replace(" ", ""))
-
-    # ブラウザのオプションを格納する変数をもらってきます。
-    options = Options()
-    options.binary_location = goole
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-    options.set_headless(True)
-
-    # ブラウザを起動する
-    driver = webdriver.Chrome(options=options)
-    # ブラウザでアクセスする
-    driver.get(url)
-    
-    #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()
-    await ctx.send("更新処理")
-    driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
+    # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
+    instance = requests.get(url)  
 
     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
-    instance = requests.get(url)
     soup = BeautifulSoup(instance.text, "html.parser")
 
-    ret_text1 = "KD:" + soup.find_all("div", class_="ranked-stats__value ranked-stats__value--imp ranked-stats__value--good").text
+    # CSSセレクターを使って指定した場所のtextを表示します
+    ret_text1 = "KD:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.kd.stats-item.stats-top-graph > p").text
+    ret_text1 = ret_text1.replace("\n", "")
+    ret_text2 = "平均ダメージ：" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.deals.stats-item.stats-top-graph > p").text
+    ret_text2 = ret_text2.replace("\n", "")
+    ret_text3 = "ゲーム数:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.games.stats-item.stats-top-graph > p").text
+    ret_text3 = ret_text3.replace("\n", "")
+    ret_text4 = "最高キル:" + soup.select_one("#profile > div.profileContent.season-19.steam > div.modeSummary > section.squad.modeItem > div.mode-section.fpp > div.stats > div.mostkills.stats-item.stats-top-graph > p").text
+    ret_text4 = ret_text4.replace("\n", "")
+
+    #ret_text1 = "KD:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(1) > div:nth-child(2)").text
+    #ret_text2 = "平均ダメージ：" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(2) > div:nth-child(2)").text
+    #ret_text3 = "ゲーム数：" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > div > div:nth-child(2) > div:nth-child(1)").text
+    #ret_text4 = "最高キル：" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(10) > div.ranked-stats__value").text
     
-    await ctx.send(ret_text1.replace(" ", ""))
+    ret_text = "プレイヤーネーム：" + arg + "\n" + ret_text1 + "  " + ret_text2 + "  " + ret_text3 + "\n" + ret_text4 
+    await ctx.send(ret_text.replace(" ", ""))
+
+    # ブラウザのオプションを格納する変数をもらってきます。
+#     options = Options()
+#     options.binary_location = goole
+#     options.add_argument('--disable-gpu')
+#     options.add_argument('--no-sandbox')
+#     # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
+#     options.set_headless(True)
+
+#     # ブラウザを起動する
+#     driver = webdriver.Chrome(options=options)
+#     # ブラウザでアクセスする
+#     driver.get(url)
+    
+#     #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()
+#     await ctx.send("更新処理")
+#     driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
 
 bot.run(token)

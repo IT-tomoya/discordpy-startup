@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
-
+goole_bin =  os.environ['GOOGLE_CHROME_BIN']
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send(str(error))
@@ -55,7 +55,7 @@ async def pubg(ctx, arg):
 
     # ブラウザのオプションを格納する変数をもらってきます。
     options = Options()
-    options.binary_location = GOOGLE_CHROME_BIN
+    options.binary_location = google_bin
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）

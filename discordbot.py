@@ -46,7 +46,7 @@ async def pubg(ctx, arg):
     #ret_text3 = "ゲーム数：" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > div > div:nth-child(2) > div:nth-child(1)").text
     #ret_text4 = "最高キル：" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(10) > div.ranked-stats__value").text
     
-    ret_text = "プレイヤーネーム：" + arg + "\n" + ret_text1 + "  " + ret_text2 + "  " + ret_text3 + "\n" + ret_text4 
+    ret_text = "プレイヤーネーム：" + arg + "\n" + ret_text1 + ret_text2 + "\n" + ret_text3 + ret_text4 
     await ctx.send(ret_text.replace(" ", ""))
 
     # ブラウザのオプションを格納する変数をもらってきます。

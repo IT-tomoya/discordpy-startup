@@ -48,5 +48,9 @@ async def pubg(ctx, arg):
     
     ret_text = ret_text1 + "\n" + ret_text2 + "\n" + ret_text3 + "\n" + ret_text4 
     await ctx.send(ret_text.replace(" ", ""))
+    await ctx.send(ret_text1.replace(" ", ""))
+    await ctx.send(ret_text2.replace(" ", ""))
+    await ctx.send(ret_text3.replace(" ", ""))
+    await ctx.send(ret_text4.replace(" ", ""))
 
 bot.run(token)

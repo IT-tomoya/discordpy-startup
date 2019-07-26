@@ -69,6 +69,8 @@ async def pubg(ctx, arg):
 
     # HTMLを文字コードをUTF-8に変換してから取得します。
     html = driver.page_source.encode('utf-8')
+    soup = BeautifulSoup(html, "html.parser")
+    
     ret_text1 = "KD:" + soup.select_one("#rankedStatsWrap > div.ranked-stats-wrapper__list > div:nth-child(95) > div > div:nth-child(3) > div > div > div > ul > li:nth-child(1) > div:nth-child(2)").text
     await ctx.send(ret_text1.replace(" ", ""))
 

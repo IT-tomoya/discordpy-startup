@@ -62,7 +62,7 @@ async def pubg(ctx, arg):
     options.set_headless(True)
 
     # ブラウザを起動する
-    driver = webdriver.Chrome(executable_path=google, chrome_options=options)
+    driver = webdriver.Chrome(executable_path=goole, chrome_options=options)
 
     # ブラウザでアクセスする
     driver.get(url)

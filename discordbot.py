@@ -64,23 +64,18 @@ async def pubg(ctx, arg):
 
     # ブラウザを起動する
     driver = webdriver.Chrome(options=options)
-    #driver.implicitly_wait(10)
     # ブラウザでアクセスする
     driver.get(url)
     
     #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()	
-    driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()
-    #time.sleep(3)
-
-    instance = requests.get(url)  
-
+    try:
+        driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
+    except:
+        await ctx.send("更新失敗")
+    
     # instanceからHTMLを取り出して、BeautifulSoupで扱えるようにパースします
+    instance = requests.get(url)
     soup = BeautifulSoup(instance.text, "html.parser")
-    
-    # HTMLを文字コードをUTF-8に変換してから取得します。
-    #html = driver.page_source.encode('utf-8')
-    
-    #soup = BeautifulSoup(html, "html.parser")
 
     ret_text1 = "KD:" + soup.find_all("div", class_="ranked-stats__value ranked-stats__value--imp ranked-stats__value--good").text
     

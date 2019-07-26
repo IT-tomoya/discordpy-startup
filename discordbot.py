@@ -68,7 +68,7 @@ async def pubg(ctx, arg):
     # ブラウザでアクセスする
     driver.get(url)
     
-    driver.find_element_by_class_name('renew').click()	
+    driver.findElements(By.xpath("//*[@id="profile"]/div[1]/div[1]/div/button")).click()	
     time.sleep(3)
 
     instance = requests.get(url)  

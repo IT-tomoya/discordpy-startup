@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
-goole_bin =  os.environ['GOOGLE_CHROME_BIN']
+goole_bin = os.environ['GOOGLE_CHROME_BIN']
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send(str(error))

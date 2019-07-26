@@ -68,15 +68,12 @@ async def pubg(ctx, arg):
     # ブラウザでアクセスする
     driver.get(url)
     stats = driver.find_element_by_class_name('renew').click()	
-　　time.sleep(5)
+    time.sleep(5)
 
     # HTMLを文字コードをUTF-8に変換してから取得します。
     #html = driver.page_source.encode('utf-8')
     soup = BeautifulSoup(html, "html.parser")
-    for a in soup:
-	ret_text1 += a + "\n"
-	break;
-    
+
     ret_text1 = "KD:" + soup.find_all("div", class_="ranked-stats__value ranked-stats__value--imp ranked-stats__value--good").text
     
     await ctx.send(ret_text1.replace(" ", ""))

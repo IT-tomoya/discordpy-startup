@@ -68,7 +68,8 @@ async def pubg(ctx, arg):
     # ブラウザでアクセスする
     driver.get(url)
     
-    driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()	
+    #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()	
+    driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()
     time.sleep(3)
 
     instance = requests.get(url)  

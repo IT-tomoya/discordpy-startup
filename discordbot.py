@@ -22,8 +22,8 @@ async def ping(ctx):
 async def pubg(ctx, arg):
     ret_text = ""
     # アクセスするURL
-    #url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
-    url = "https://pubg.op.gg/user/" + arg
+    url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
+    #url = "https://pubg.op.gg/user/" + arg
     
 #     # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
 #     instance = requests.get(url)  

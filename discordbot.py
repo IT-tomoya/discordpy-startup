@@ -1,5 +1,5 @@
 from discord.ext import commands
-from fiscord.ext import *
+import discord
 import os
 import traceback
 import requests
@@ -73,6 +73,6 @@ async def pubg(ctx, arg):
     driver.set_window_size(page_width, page_height)
     driver.save_screenshot('./images/screenshot.png')
     #await ctx.send("./images/screenshot.png")
-    await ctx.send('てすと', file=discord.File('cool.png', './images/screenshot.png'))
+    await ctx.send('てすと', file=discord.File('./images/screenshot.png', 'ss.png'))
     
 bot.run(token)

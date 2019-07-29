@@ -73,7 +73,7 @@ async def pubg(ctx, arg):
     driver.set_window_size(page_width, page_height)
     if driver.save_screenshot('screenshot.png'):
         #await ctx.send("./images/screenshot.png")
-        await ctx.send('てすと', file=discord.File(goole + '/screenshot.png', 'ss.png'))
+        await ctx.send('てすと', file=discord.File('screenshot.png', 'ss.png'))
     else: 
         await ctx.send('さつえいしっぱい' + goole)
     

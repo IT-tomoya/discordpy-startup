@@ -23,7 +23,6 @@ async def pubg(ctx, arg):
     ret_text = ""
     # アクセスするURL
     url = "https://dak.gg/profile/" + arg + "/pc-2018-04/steam"
-    #url = "https://pubg.op.gg/user/" + arg
     
     # URLにアクセスする 戻り値にはアクセスした結果やHTMLなどが入ったinstanceが帰ってきます
     instance = requests.get(url)  
@@ -49,21 +48,30 @@ async def pubg(ctx, arg):
     ret_text = "プレイヤーネーム：" + arg + "\n" + ret_text1 + ret_text2 + "\n" + ret_text3 + ret_text4 
     await ctx.send(ret_text.replace(" ", ""))
 
-    # ブラウザのオプションを格納する変数をもらってきます。
-#     options = Options()
-#     options.binary_location = goole
-#     options.add_argument('--disable-gpu')
-#     options.add_argument('--no-sandbox')
-#     # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-#     options.set_headless(True)
-
-#     # ブラウザを起動する
-#     driver = webdriver.Chrome(options=options)
-#     # ブラウザでアクセスする
-#     driver.get(url)
     
-#     #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()
-#     await ctx.send("更新処理")
-#     driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
+    url2 = "https://pubg.op.gg/user/" + arg
+    # ブラウザのオプションを格納する変数をもらってきます。
+    options = Options()
+    options.binary_location = goole
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
+    options.set_headless(True)
 
+    # ブラウザを起動する
+    driver = webdriver.Chrome(options=options)
+    # ブラウザでアクセスする
+    driver.get(url2)
+    
+    #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()
+    await ctx.send("さつえいちゅうだよ！！")
+    time.sleep(2)
+    #driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
+    page_width = driver.execute_script('return document.body.scrollWidth')
+    page_height = driver.execute_script('return document.body.scrollHeight')
+    driver.set_window_size(page_width, page_height)
+    driver.save_screenshot('./images/screenshot.png')
+    #await ctx.send("./images/screenshot.png")
+    await ctx.send('てすと', file=discord.File('cool.png', './images/screenshot.png'))
+    
 bot.run(token)

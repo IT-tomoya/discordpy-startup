@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
+from PIL import Image
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -64,17 +65,19 @@ async def pubg(ctx, arg):
     # ブラウザでアクセスする
     driver.get(url2)
     
-    #driver.find_element_by_class_name("glyphicon glyphicon-refresh").click()
     await ctx.send("さつえいちゅうだよ！！")
     time.sleep(2)
-    #driver.find_elements_by_xpath("//*[@id="profile"]/div[1]/div[1]/div/button").click()    
+    
     page_width = driver.execute_script('return document.body.scrollWidth')
     page_height = driver.execute_script('return document.body.scrollHeight')
     driver.set_window_size(page_width, page_height)
     if driver.save_screenshot('screenshot.png'):
-        #await ctx.send("./images/screenshot.png")
-        await ctx.send('てすと', file=discord.File('screenshot.png', 'ss.png'))
+        im = Image.open("screenshot.png")  # (8) 
+        im = im.crop((0, 385, 998, 960))  # (9)
+        im.save("screenshot_crop.png")  # (10)
+        im.close()
+        await ctx.send(arg, file=discord.File('screenshot_crop.png', 'ss.png'))
     else: 
-        await ctx.send('さつえいしっぱい' + goole)
+        await ctx.send('さつえいしっぱい')
     
 bot.run(token)

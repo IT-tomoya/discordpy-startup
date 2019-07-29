@@ -76,7 +76,7 @@ async def pubg(ctx, arg):
         im = im.crop((0, 385, 998, 960))  # (9)
         im.save("screenshot_crop.png")  # (10)
         im.close()
-        await ctx.send("プレイヤーネーム："arg, file=discord.File('screenshot_crop.png', 'ss.png'))
+        await ctx.send("プレイヤーネーム：" + arg, file=discord.File('screenshot_crop.png', 'ss.png'))
     else: 
         await ctx.send('さつえいしっぱい')
     driver.quit()

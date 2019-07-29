@@ -49,7 +49,7 @@ async def pubg(ctx, arg):
     
 #     ret_text = "プレイヤーネーム：" + arg + "\n" + ret_text1 + ret_text2 + "\n" + ret_text3 + ret_text4 
 #     await ctx.send(ret_text.replace(" ", ""))
-
+    await ctx.send("プレイヤーネーム：" + arg)
     
     url2 = "https://pubg.op.gg/user/" + arg
     # ブラウザのオプションを格納する変数をもらってきます。
@@ -65,20 +65,19 @@ async def pubg(ctx, arg):
     # ブラウザでアクセスする
     driver.get(url2)
     
-    #await ctx.send("さつえいちゅうだよ！！")
-    time.sleep(2)
-    
     page_width = driver.execute_script('return document.body.scrollWidth')
     page_height = driver.execute_script('return document.body.scrollHeight')
     driver.set_window_size(page_width, page_height)
+    
     if driver.save_screenshot('screenshot.png'):
         im = Image.open("screenshot.png")  # (8) 
         im = im.crop((0, 385, 998, 960))  # (9)
         im.save("screenshot_crop.png")  # (10)
         im.close()
-        await ctx.send("プレイヤーネーム：" + arg, file=discord.File('screenshot_crop.png', 'ss.png'))
+        await ctx.send("", file=discord.File('screenshot_crop.png', 'ss.png'))
     else: 
         await ctx.send('さつえいしっぱい')
+    
     driver.quit()
     
 bot.run(token)

@@ -79,5 +79,6 @@ async def pubg(ctx, arg):
         await ctx.send(arg, file=discord.File('screenshot_crop.png', 'ss.png'))
     else: 
         await ctx.send('さつえいしっぱい')
+    driver.quit()
     
 bot.run(token)

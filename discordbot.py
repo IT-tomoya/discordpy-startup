@@ -1,4 +1,5 @@
 from discord.ext import commands
+from fiscord.ext import *
 import os
 import traceback
 import requests

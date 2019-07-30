@@ -68,6 +68,7 @@ async def pubg(ctx, arg):
     page_width = driver.execute_script('return document.body.scrollWidth')
     page_height = driver.execute_script('return document.body.scrollHeight')
     driver.set_window_size(page_width, page_height)
+    driver.implicitly_wait(3)
     
     if driver.save_screenshot('screenshot.png'):
         im = Image.open("screenshot.png")  # (8) 
